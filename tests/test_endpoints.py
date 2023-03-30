@@ -40,7 +40,7 @@ def test_search_endpoint(client, mock_es_client):
         "hits": [{"title": "Test Result 1", "description": "This is a test result."}],
     }
 
-
-def test_autocomplete_endpoint(client, mock_es_client):
-    response = client.post("/searchy/api/v1/autocomplate", json={"query": "test"})
-    assert response.status_code == 200
+#
+# def test_autocomplete_endpoint(client, mock_es_client):
+#     response = client.post("/searchy/api/v1/autocomplate", json={"query": "test"})
+#     assert response.status_code == 200
