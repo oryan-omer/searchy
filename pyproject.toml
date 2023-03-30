@@ -17,6 +17,7 @@ black = "^23.3.0"
 uvicorn = "^0.21.1"
 slowapi = "^0.1.7"
 httpx = "^0.23.3"
+mock = "^5.0.1"
 
 
 [build-system]
