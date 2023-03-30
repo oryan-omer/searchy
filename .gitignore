@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+venv/
+.venv/
+.env
+
+# Pytest
+.pytest_cache/
+
+# PyCharm
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Docker
+.DS_Store
+docker-compose.yml
+docker-compose.override.yml
+*.log
+*.pid
+*.pyc
+*.pyo
+*.swp
