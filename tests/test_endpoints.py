@@ -3,6 +3,7 @@ from elasticsearch import Elasticsearch
 from fastapi.testclient import TestClient
 from unittest.mock import patch
 
+from service.controllers import ElasticsearchController
 from service.searchy import Searchy
 
 
@@ -14,7 +15,9 @@ def client():
 
 @pytest.fixture
 def mock_es_client():
-    with patch.object(Elasticsearch, "__init__", lambda x: None):
+    with patch.object(
+        ElasticsearchController, "healthcheck", lambda x: None
+    ), patch.object(Elasticsearch, "__init__", lambda x: None):
         with patch.object(Elasticsearch, "search") as mock_search:
             mock_search.return_value = {
                 "hits": {
@@ -39,6 +42,7 @@ def test_search_endpoint(client, mock_es_client):
         "total": 1,
         "hits": [{"title": "Test Result 1", "description": "This is a test result."}],
     }
+
 
 #
 # def test_autocomplete_endpoint(client, mock_es_client):
