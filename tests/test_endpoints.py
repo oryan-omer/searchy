@@ -1,9 +1,9 @@
 import pytest
 from elasticsearch import Elasticsearch
+from elasticsearch._sync.client import ClusterClient
 from fastapi.testclient import TestClient
-from unittest.mock import patch
+from mock import patch
 
-from service.controllers import ElasticsearchController
 from service.searchy import Searchy
 
 
@@ -15,9 +15,9 @@ def client():
 
 @pytest.fixture
 def mock_es_client():
-    with patch.object(
-        ElasticsearchController, "healthcheck", lambda x: None
-    ), patch.object(Elasticsearch, "__init__", lambda x: None):
+    with patch.object(ClusterClient, "health", lambda x: None), patch.object(
+        Elasticsearch, "__init__", lambda x: None
+    ):
         with patch.object(Elasticsearch, "search") as mock_search:
             mock_search.return_value = {
                 "hits": {
@@ -35,7 +35,7 @@ def mock_es_client():
             yield mock_search
 
 
-def test_search_endpoint(client, mock_es_client):
+def test_search_endpoint(mock_es_client, client):
     response = client.post("/searchy/api/v1/search", json={"query": "test"})
     assert response.status_code == 200
     assert response.json() == {
