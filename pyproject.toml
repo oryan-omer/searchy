@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "searchy"
+version = "0.1.0"
+description = ""
+authors = ["Oryan Omer <oryandrive@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = "^0.95.0"
+elasticsearch = "^8.6.2"
+flake8 = "^6.0.0"
+pylint = "^2.17.1"
+pytest = "^7.2.2"
+black = "^23.3.0"
+uvicorn = "^0.21.1"
+slowapi = "^0.1.7"
+httpx = "^0.23.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
