@@ -1,6 +1,8 @@
 # Searchy
 
-[![CI/CD Status](https://img.shields.io/github/workflow/status/oryan-omer/searchy/CI-CD?label=CI/CD&logo=github-actions&style=flat-square)](https://github.com/oryan-omer/searchy/actions)
+![CI-CD Status](https://github.com/oryan-omer/searchy/actions/workflows/main.yaml/badge.svg
+)
+
 [![Python Version](https://img.shields.io/badge/python-3.9-blue?logo=python&style=flat-square)](https://www.python.org/downloads/)
 [![Coverage Status](https://img.shields.io/codecov/c/github/oryan-omer/searchy?logo=codecov&style=flat-square)](https://codecov.io/gh/oryan-omer/searchy)
 
