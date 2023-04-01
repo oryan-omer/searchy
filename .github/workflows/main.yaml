@@ -40,8 +40,6 @@ jobs:
           poetry install
       - name: Run pytest
         run: poetry run pytest
-      - name: Python Coverage Comment
-        uses: py-cov-action/python-coverage-comment-action@v2.2.0
 
 
   build_and_push_docker:
