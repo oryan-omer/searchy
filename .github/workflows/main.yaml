@@ -39,7 +39,10 @@ jobs:
           pip install poetry
           poetry install
       - name: Run pytest
-        run: poetry run pytest
+        run: coverage poetry run pytest
+      - uses: actions/checkout@v2
+      - name: Coverage Badge
+        uses: tj-actions/coverage-badge-py@v2
 
 
   build_and_push_docker:
