@@ -41,7 +41,7 @@ docker-compose up -d elasticsearch redis
 
 2. Run the app using Poetry:
 ```bash
-poetry run uvicorn app.main:app --reload
+poetry run uvicorn server:app.app --reload
 ```
 
 3. The app should now be accessible at http://localhost:80.

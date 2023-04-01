@@ -1,18 +1,29 @@
 from typing import Union, List, Dict
 
-from elasticsearch import Elasticsearch
+from elasticsearch import AsyncElasticsearch
 
+from service.controllers.base import BaseGracefulShutdown
 from service.utils.logger import get_logger
 from service.utils.settings import settings
 
 logger = get_logger()
 
 
-class ElasticsearchController:
-    def __init__(self, elastic_host=settings.ELASTICSEARCH_URL):
-        self.es_client = Elasticsearch(elastic_host)
+class ElasticsearchController(BaseGracefulShutdown):
+    instance = None
 
-    def search(self, query: str) -> (Dict, Union[str, None]):
+    def __init__(self, elastic_host=settings.ELASTICSEARCH_URL):
+        logger.info("Starting elasticsearch...")
+        self.es_client = AsyncElasticsearch(elastic_host)
+
+    @classmethod
+    async def get_instance(cls):
+        if cls.instance is None:
+            cls.instance = ElasticsearchController()
+
+        return cls.instance
+
+    async def search(self, query: str) -> (Dict, Union[str, None]):
         try:
             search_body = {
                 "query": {
@@ -25,7 +36,7 @@ class ElasticsearchController:
                 }
             }
 
-            search_result = self.es_client.search(
+            search_result = await self.es_client.search(
                 index=settings.ELASTICSEARCH_INDEX, body=search_body
             )
 
@@ -39,7 +50,7 @@ class ElasticsearchController:
         except Exception as e:
             return [], e
 
-    def autocomplete(self, query) -> (List[dict], Union[str, None]):
+    async def autocomplete(self, query) -> (List[dict], Union[str, None]):
         try:
             search_body = {
                 "suggest": {
@@ -52,7 +63,7 @@ class ElasticsearchController:
                 }
             }
 
-            search_result = self.es_client.search(
+            search_result = await self.es_client.search(
                 index=settings.ELASTICSEARCH_INDEX, body=search_body
             )
 
@@ -66,9 +77,18 @@ class ElasticsearchController:
         except Exception as e:
             return [], e
 
-    def healthcheck(self):
+    async def healthcheck(self):
         try:
-            self.es_client.cluster.health()
+            await self.es_client.cluster.health()
         except Exception as e:
             logger.error(f"elasticsearch is not healthy and not available, error={e}")
             raise Exception("elasticsearch is not healthy and not available")
+
+    async def shutdown(self):
+        await self.es_client.close()
+
+
+async def get_elasticsearch_controller():
+    elasticsearch_controller = await ElasticsearchController.get_instance()
+    await elasticsearch_controller.healthcheck()
+    return elasticsearch_controller

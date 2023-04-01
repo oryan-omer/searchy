@@ -7,7 +7,7 @@ class Settings(BaseSettings):
     REDIS_URL = "redis://localhost:6379/0"
     ELASTICSEARCH_URL = "http://localhost:9200"
     AUTO_COMPLETION_SIZE = 10
-    ELASTICSEARCH_INDEX = "TEST"
+    ELASTICSEARCH_INDEX = "netflix_movies"
     URL_PREFIX = "/searchy/api/v1"
 
 
