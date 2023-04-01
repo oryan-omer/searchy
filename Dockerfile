@@ -2,9 +2,9 @@ FROM python:3.9
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y curl
+RUN apt-get update && apt-get install --no-install-recommends  -y curl==8.0.1
 
-RUN pip install poetry
+RUN pip install poetry==1.4.1
 
 COPY pyproject.toml poetry.lock /app/
 

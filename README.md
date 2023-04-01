@@ -7,10 +7,10 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/f0171a2d51dc4b558ff00304344fd025)](https://app.codacy.com/gh/oryan-omer/searchy/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)  
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/summary/new_code?id=oryan-omer_searchy)
 
-Searchy is a powerful and flexible Python-based search engine that is built using a variety of technologies.   
-It utilizes FastAPI as its web framework, which provides a high-performance and easy-to-use RESTful API for serving search requests.   
-The search engine itself is built using Elasticsearch, a highly scalable and distributed search and analytics engine that is designed to handle large amounts of data.   
-Finally, Searchy also uses Redis, an open-source, in-memory data structure store, to cache frequently accessed data and improve performance.
+Searchy is a powerful and flexible Python-based search engine that is built using a variety of technologies.  
+It utilizes FastAPI as its web framework, which provides a high-performance and easy-to-use RESTful API for serving search requests.        
+The search engine itself is built using Elasticsearch, a highly scalable and distributed search and analytics engine that is designed to handle large amounts of data.     
+Finally, Searchy also uses Redis, an open-source, in-memory data structure store, to cache frequently accessed data and improve performance.  
 
 
 ## Requirements:
