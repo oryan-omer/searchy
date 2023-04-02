@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  static_analysis:
+  static-analysis:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -25,9 +25,9 @@ jobs:
       - name: Run Python Black
         run: make run-black-check
 
-  security_checks:
+  security-checks:
     runs-on: ubuntu-latest
-    needs: static_analysis
+    needs: static-analysis
     steps:
       - name: Analyze with SonarCloud
         uses: SonarSource/sonarcloud-github-action@de2e56b42aa84d0b1c5b622644ac17e505c9a049
@@ -42,7 +42,7 @@ jobs:
 
   unit-tests:
     runs-on: ubuntu-latest
-    needs: [ static_analysis, security-checks ]
+    needs: [ static-analysis, security-checks ]
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -58,9 +58,9 @@ jobs:
         run: make test
 
 
-  build_and_push_docker:
+  build-image:
     runs-on: ubuntu-latest
-    needs: [ static_analysis, tests,security-checks ]
+    needs: [ static-analysis, unit-tests,security-checks ]
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
