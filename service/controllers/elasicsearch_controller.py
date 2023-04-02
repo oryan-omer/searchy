@@ -60,8 +60,8 @@ class ElasticsearchController(BaseGracefulShutdown, BaseSingleton):
                         "prefix": query,
                         "completion": {
                             "field": "description",
-                            "size": settings.AUTO_COMPLETION_SIZE
-                        }
+                            "size": settings.AUTO_COMPLETION_SIZE,
+                        },
                     }
                 }
             }
