@@ -38,10 +38,15 @@ poetry install
 ```python
 docker-compose up -d elasticsearch redis
 ```
+an alternative
+```python
+make run-dev
+```
 
-2. Run the app using Poetry:
+
+2. Run the app:
 ```bash
-poetry run uvicorn server:app.app --reload
+make run
 ```
 
 3. The app should now be accessible at http://localhost:80.
@@ -53,7 +58,7 @@ Searchy can be deployed to a Kubernetes cluster using a Helm chart. The chart ca
 To run the test suite, use the following command:
 
 ```bash
-poetry run pytest
+make test
 ```
 
 ## Contributing

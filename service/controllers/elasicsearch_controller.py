@@ -2,14 +2,14 @@ from typing import Union, List, Dict
 
 from elasticsearch import AsyncElasticsearch
 
-from service.controllers.base import BaseGracefulShutdown
+from service.controllers.base import BaseGracefulShutdown, BaseSingleton
 from service.utils.logger import get_logger
 from service.utils.settings import settings
 
 logger = get_logger()
 
 
-class ElasticsearchController(BaseGracefulShutdown):
+class ElasticsearchController(BaseGracefulShutdown, BaseSingleton):
     instance = None
 
     def __init__(self, elastic_host=settings.ELASTICSEARCH_URL):
@@ -25,6 +25,7 @@ class ElasticsearchController(BaseGracefulShutdown):
 
     async def search(self, query: str) -> (Dict, Union[str, None]):
         try:
+            logger.debug(f"Searching request for query {query}")
             search_body = {
                 "query": {
                     "multi_match": {
@@ -52,6 +53,7 @@ class ElasticsearchController(BaseGracefulShutdown):
 
     async def autocomplete(self, query) -> (List[dict], Union[str, None]):
         try:
+            logger.debug(f"Autocomplete request for query {query}")
             search_body = {
                 "suggest": {
                     "text": query,

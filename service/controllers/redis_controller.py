@@ -1,16 +1,15 @@
-import base64
 import json
 
 import aioredis as aioredis
 
-from service.controllers.base import BaseGracefulShutdown
+from service.controllers.base import BaseGracefulShutdown, BaseSingleton
 from service.utils.logger import get_logger
 from service.utils.settings import settings
 
 logger = get_logger()
 
 
-class RedisController(BaseGracefulShutdown):
+class RedisController(BaseGracefulShutdown, BaseSingleton):
     _instance = None
 
     def __init__(self):
@@ -40,7 +39,11 @@ class RedisController(BaseGracefulShutdown):
         try:
             logger.debug(f"get key from cache, key={key}")
             bin_value = await self.redis_client.get(key)
-            return json.loads(bin_value.decode("utf8")) if bin_value is not None else bin_value
+            if bin_value is not None:
+                logger.debug(f"cache hit, key={key}")
+                return json.loads(bin_value.decode("utf8"))
+            logger.debug(f"cache miss, key={key}")
+            return bin_value
         except Exception as e:
             logger.error(f"Error getting key from cache store, key={key}, error={e}")
             raise Exception(f"Error getting key from cache store, key={key}, error={e}")

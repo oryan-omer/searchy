@@ -20,7 +20,7 @@ def create_es_index_for_netflix_movies_data(es_client, index_name):
 
 
 def prepare_bulk_data(index_name):
-    df = pd.read_csv('./load/netflix_titles.csv')
+    df = pd.read_csv('netflix_titles.csv')
     df = df.dropna()
     records = df.to_dict(orient='records')
     for record in records:
