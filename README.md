@@ -4,8 +4,8 @@
 )
 
 [![Python Version](https://img.shields.io/badge/python-3.8-blue?logo=python&style=flat-square)](https://www.python.org/downloads/)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/f0171a2d51dc4b558ff00304344fd025)](https://app.codacy.com/gh/oryan-omer/searchy/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)  
-[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/summary/new_code?id=oryan-omer_searchy)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/f0171a2d51dc4b558ff00304344fd025)](https://app.codacy.com/gh/oryan-omer/searchy/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=oryan-omer_searchy&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=oryan-omer_searchy)
 
 Searchy is a powerful and flexible Python-based search engine that is built using a variety of technologies.  
 It utilizes FastAPI as its web framework, which provides a high-performance and easy-to-use RESTful API for serving search requests.        
