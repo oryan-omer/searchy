@@ -1,4 +1,4 @@
-.PHONY: run test build run-docker load run-dev run-static-analysis run-black run-black-check
+.PHONY: run test build run-docker load run-dev run-static-analysis run-black run-black-check create-badge
 
 run:
 	uvicorn server:app.app --host 0.0.0.0 --port 80 --reload
@@ -26,3 +26,7 @@ run-black:
 
 run-black-check:
 	poetry run black --check .
+
+create-badge:
+	coverage run -m pytest
+	coverage-badge -o coverage.svg
