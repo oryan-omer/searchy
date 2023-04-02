@@ -43,9 +43,9 @@ async def autocomplete(
     Endpoint to perform autocomplete on Elasticsearch for the given query.
     """
     if not (
-        suggestions := await is_in_cache(redis_controller, autocomplete_request.query)
+        suggestions := await is_in_cache(redis_controller, f"autocomplete_{autocomplete_request.query}")
     ):
-        suggestions, error = elasticsearch_controller.autocomplete(
+        suggestions, error = await elasticsearch_controller.autocomplete(
             autocomplete_request.query
         )
         if error is not None:
@@ -54,7 +54,7 @@ async def autocomplete(
                 "Error auto complete query",
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
-        await redis_controller.set(autocomplete_request.query, suggestions)
+        await redis_controller.set(f"autocomplete_{autocomplete_request.query}", suggestions)
 
     return AutocompleteResponse(suggestions=suggestions)
 
@@ -70,7 +70,7 @@ async def search(
     """
     Endpoint to perform a search on Elasticsearch for the given query.
     """
-    if not (res := await is_in_cache(redis_controller, search_request.query)):
+    if not (res := await is_in_cache(redis_controller, f"search_{search_request.query}")):
         res, error = await elasticsearch_controller.search(search_request.query)
         if error is not None:
             logger.error(f"Error to search, query={search_request.query},error={error}")
@@ -78,5 +78,5 @@ async def search(
                 "Error to search, query",
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
-        await redis_controller.set(search_request.query, res)
+        await redis_controller.set(f"search_{search_request.query}", res)
     return SearchResult(total=res["total"], hits=res["hits"])

@@ -56,12 +56,13 @@ class ElasticsearchController(BaseGracefulShutdown, BaseSingleton):
             logger.debug(f"Autocomplete request for query {query}")
             search_body = {
                 "suggest": {
-                    "text": query,
-                    "completion": {
-                        "field": "suggest",
-                        "skip_duplicates": True,
-                        "size": settings.AUTO_COMPLETION_SIZE,
-                    },
+                    "movie-suggest": {
+                        "prefix": query,
+                        "completion": {
+                            "field": "description",
+                            "size": settings.AUTO_COMPLETION_SIZE
+                        }
+                    }
                 }
             }
 

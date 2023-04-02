@@ -3,7 +3,7 @@
 ![CI-CD Status](https://github.com/oryan-omer/searchy/actions/workflows/main.yaml/badge.svg
 )
 
-[![Python Version](https://img.shields.io/badge/python-3.9-blue?logo=python&style=flat-square)](https://www.python.org/downloads/)
+[![Python Version](https://img.shields.io/badge/python-3.8-blue?logo=python&style=flat-square)](https://www.python.org/downloads/)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/f0171a2d51dc4b558ff00304344fd025)](https://app.codacy.com/gh/oryan-omer/searchy/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)  
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/summary/new_code?id=oryan-omer_searchy)
 
