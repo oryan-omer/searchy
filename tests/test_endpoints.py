@@ -17,13 +17,14 @@ def client():
     return TestClient(app.app)
 
 
-@pytest.mark.skip(name="Should fix mock for async elastic search")
+@pytest.mark.skip("Should fix mock for async elastic search")
 def test_search_endpoint_cache_miss(client, monkeypatch):
     mock_es_instance = AsyncMock(spec=AsyncElasticsearch)
     mock_redis_instance = AsyncMock(spec=aioredis.Redis)
 
-    with patch("elasticsearch.AsyncElasticsearch") as mock_es, \
-            patch("aioredis.from_url") as mock_redis:
+    with patch("elasticsearch.AsyncElasticsearch") as mock_es, patch(
+        "aioredis.from_url"
+    ) as mock_redis:
         mock_es.return_value = mock_es_instance
         future = asyncio.Future()
         future.set_result(mock_redis_instance)
@@ -46,13 +47,17 @@ def test_search_endpoint_cache_miss(client, monkeypatch):
 def test_search_endpoint_cache_hit(client, monkeypatch):
     mock_es_instance = AsyncMock(spec=AsyncElasticsearch)
     mock_redis_instance = AsyncMock(spec=aioredis.Redis)
-    with patch("elasticsearch.AsyncElasticsearch") as mock_es, \
-            patch("aioredis.from_url") as mock_redis:
+    with patch("elasticsearch.AsyncElasticsearch") as mock_es, patch(
+        "aioredis.from_url"
+    ) as mock_redis:
         mock_es.return_value = mock_es_instance
         future = asyncio.Future()
         future.set_result(mock_redis_instance)
         mock_redis.return_value = future
-        expected_result = {"hits": [{"_source": {"title": "example title"}}], "total": 10}
+        expected_result = {
+            "hits": [{"_source": {"title": "example title"}}],
+            "total": 10,
+        }
 
         mock_es_instance.search.return_value = expected_result
         future = asyncio.Future()

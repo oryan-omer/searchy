@@ -1,4 +1,4 @@
-.PHONY: run test build run-docker load run-dev
+.PHONY: run test build run-docker load run-dev run-static-analysis run-black run-black-check
 
 run:
 	uvicorn server:app.app --host 0.0.0.0 --port 80 --reload
@@ -17,3 +17,12 @@ run-dev:
 
 load:
 	python3 load/load_es.py
+
+run-static-analysis:
+	poetry run flake8 --ignore=F401,E501  service/
+
+run-black:
+	poetry run black .
+
+run-black-check:
+	poetry run black --check .
