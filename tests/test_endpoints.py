@@ -23,7 +23,7 @@ def test_search_endpoint_cache_miss(client, monkeypatch):
     mock_redis_instance = AsyncMock(spec=aioredis.Redis)
 
     with patch("elasticsearch.AsyncElasticsearch") as mock_es, patch(
-            "aioredis.from_url"
+        "aioredis.from_url"
     ) as mock_redis:
         mock_es.return_value = mock_es_instance
         future = asyncio.Future()
@@ -45,12 +45,16 @@ def test_search_endpoint_cache_miss(client, monkeypatch):
 
 
 @pytest.mark.skip("Should fix mock for async elastic search")
-@patch('elasticsearch.AsyncElasticsearch', new_callable=AsyncMock(spec=AsyncElasticsearch))
+@patch(
+    "elasticsearch.AsyncElasticsearch", new_callable=AsyncMock(spec=AsyncElasticsearch)
+)
 def test_search_endpoint_cache_hit(mock_es, client):
     mock_redis_instance = AsyncMock(spec=aioredis.Redis)
     with patch("elasticsearch.AsyncElasticsearch") as mock_es, patch(
-            "aioredis.from_url"
-    ) as mock_redis, patch("elasticsearch._async.client.cluster.ClusterClient") as mock_es_cluster_client:
+        "aioredis.from_url"
+    ) as mock_redis, patch(
+        "elasticsearch._async.client.cluster.ClusterClient"
+    ) as mock_es_cluster_client:
         future = asyncio.Future()
         future.set_result(mock_redis_instance)
         mock_redis.return_value = future
