@@ -7,7 +7,8 @@ run-docker:
 	docker build -t searchy .
 	docker run searchy
 test:
-	 coverage run -m pytest
+	pip install coverage
+	poetry run coverage run -m pytest
 
 build:
 	docker build -t searchy .
@@ -28,5 +29,5 @@ run-black-check:
 	poetry run black --check .
 
 create-badge:
-	coverage run -m pytest
+	poetry run coverage run -m pytest
 	coverage-badge -o coverage.svg
