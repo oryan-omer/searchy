@@ -12,14 +12,15 @@ logger = get_logger()
 class ElasticsearchController(BaseGracefulShutdown, BaseSingleton):
     instance = None
 
-    def __init__(self, elastic_host=settings.ELASTICSEARCH_URL):
+    def __init__(self):
         logger.info("Starting elasticsearch...")
-        self.es_client = AsyncElasticsearch(elastic_host)
+        self.es_client = None
 
     @classmethod
     async def get_instance(cls):
         if cls.instance is None:
             cls.instance = ElasticsearchController()
+            cls.instance.es_client = AsyncElasticsearch(settings.ELASTICSEARCH_URL)
 
         return cls.instance
 
