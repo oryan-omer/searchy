@@ -8,12 +8,13 @@
 ![Code Coverage](https://img.shields.io/codecov/c/github/oryan-omer/searchy)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=oryan-omer_searchy&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=oryan-omer_searchy)
 
-Searchy is a powerful and flexible Python-based search engine that is built using a variety of technologies.  
+**Searchy** is a powerful and flexible Python-based search engine that is built using a variety of technologies.  
 It utilizes FastAPI as its web framework, which provides a high-performance and easy-to-use RESTful API for serving search requests.        
 The search engine itself is built using Elasticsearch, a highly scalable and distributed search and analytics engine that is designed to handle large amounts of data.     
 Finally, Searchy also uses Redis, an open-source, in-memory data structure store, to cache frequently accessed data and improve performance.  
 
-
+To start using Searchy, after deploying the app you can checkout Searchy Swagger which will be available on url: `http://localhost/searchy/api/v1/docs`.
+![Screenshot 2023-04-05 at 0.20.13.png](..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fv8%2F42dwygs53ld56mfrk4rnd2n80000gp%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_7AgxBS%2FScreenshot%202023-04-05%20at%200.20.13.png)
 ## Requirements:
 - Python 3.8 or higher
 - Docker
@@ -41,7 +42,7 @@ docker-compose up -d elasticsearch redis
 ```
 an alternative
 ```python
-make run-dev
+make prepare-dev
 ```
 
 
@@ -55,6 +56,14 @@ make run
 ## Running on top of K8S
 Searchy can be deployed to a Kubernetes cluster using a Helm chart. The chart can be customized to fit your specific needs, including configuring Elasticsearch and Redis settings, scaling the number of replicas, and setting up ingress and other networking options. Once deployed, you can use the Searchy API to power your search application, or integrate it into other services as needed.
 
+For deploying Searchy to a Kubernetes cluster:
+1. Check our `values.yaml` file in searchy-chart and tune to your desired settings.
+
+2. deploy the chart by run the following command:
+```bash
+cd searchy-chart/
+helm install . -n <your namespace>
+```
 ## Testing
 To run the test suite, use the following command:
 
