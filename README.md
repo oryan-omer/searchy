@@ -13,8 +13,12 @@ It utilizes FastAPI as its web framework, which provides a high-performance and 
 The search engine itself is built using Elasticsearch, a highly scalable and distributed search and analytics engine that is designed to handle large amounts of data.     
 Finally, Searchy also uses Redis, an open-source, in-memory data structure store, to cache frequently accessed data and improve performance.  
 
+## Architecture
+![Architecture](./architecture.png)
+
+
 To start using Searchy, after deploying the app you can checkout Searchy Swagger which will be available on url: `http://localhost/searchy/api/v1/docs`.
-![Screenshot 2023-04-05 at 0.20.13.png](..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fv8%2F42dwygs53ld56mfrk4rnd2n80000gp%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_7AgxBS%2FScreenshot%202023-04-05%20at%200.20.13.png)
+![APIs](./api-reference.png)
 ## Requirements:
 - Python 3.8 or higher
 - Docker
