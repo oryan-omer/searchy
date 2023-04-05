@@ -22,14 +22,14 @@ def _health_check(request: Request):
 
 class Searchy:
     def __init__(self):
-        self.app = FastAPI()
+        self.app = FastAPI(title="Searchy",docs_url=f"{settings.URL_PREFIX}/docs")
         self.app.logger = logger
         self.app.state.limiter = limiter
         self.controllers_to_terminate = []
         self.app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
         self.app.add_event_handler("startup", self._init_controllers)
         self.app.add_event_handler("shutdown", self._terminate_controllers)
-        self.app.add_api_route(f"{settings.URL_PREFIX}/health_check", _health_check)
+        self.app.add_api_route(f"{settings.URL_PREFIX}/health_check", _health_check,include_in_schema=False)
         self._include_routers_middleware()
         self._register_routers()
 

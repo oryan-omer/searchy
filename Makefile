@@ -1,4 +1,4 @@
-.PHONY: run test build run-docker load run-dev run-static-analysis run-black run-black-check create-badge
+.PHONY: run test build run-docker load prepare-dev run-static-analysis run-black run-black-check create-badge
 
 run:
 	uvicorn server:app.app --host 0.0.0.0 --port 80 --reload
@@ -13,7 +13,7 @@ test:
 build:
 	docker build -t searchy .
 
-run-dev:
+prepare-dev:
 	docker-compose up
 
 load:
